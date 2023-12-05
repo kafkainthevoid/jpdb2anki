@@ -126,7 +126,7 @@ const [play_audio, preload_audio, get_playing_audio_element] = (function () {
 
               frequencyEl.appendChild(download_link)
 
-              audioFilename.push({ filename, data: final_final })
+              audioFilename.push(filename)
 
               // chrome.runtime.onMessage.addListener(function (
               //   request,
@@ -518,6 +518,8 @@ const getMonolingualExample = () => {
     .join('')
 }
 
+console.log('from audio with pain')
+
 // document.addEventListener('DOMContentLoaded', function () {
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   if (request['type'] == 'popup_start_signal') {
@@ -531,13 +533,10 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
       monolingualExample: getMonolingualExample(),
     }
 
-    console.log({ audioFilename, data })
-
-    // sendResponse({
-    //   audioFilename,
-    //   data,
-    // })
+    sendResponse({
+      audioFilename,
+      data,
+    })
   }
   return true
 })
-// })
